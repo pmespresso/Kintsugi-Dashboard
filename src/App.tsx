@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Container } from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 import styled from "styled-components";
+import SelectAccountDropdown from "./components/SelectAccountDropdown";
 import { useExtension } from "./hooks/useExtension";
 
 import logo from "./logo.svg";
@@ -25,14 +26,27 @@ const Background = styled.div`
 `;
 
 const Title = styled.h1`
-  font-family: aktiv-grotesk;
+  font-family: aktiv-grotesk, sans-serif;
+  font-size: 96px;
+  font-weight: 500;
 `;
 
-const Center = styled.div`
+const TitleArea = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
+
+  > h1 {
+    margin: 10px 0;
+  }
+`;
+
+const Section = styled(Row)`
+  justify-content: center;
+  align-items: center;
+
+  padding: 10em 0 0 10em;
 `;
 
 function App() {
@@ -43,10 +57,18 @@ function App() {
   return (
     <Background>
       <Container>
-        <Center>
-          <Title>Use Your Bitcoin.</Title>
-          <Title>Anywhere.</Title>
-        </Center>
+        <Section>
+          <Col>
+            <TitleArea>
+              <Title>Use Your Bitcoin.</Title>
+              <Title>Anywhere.</Title>
+            </TitleArea>
+          </Col>
+          <Col>
+            <SelectAccountDropdown />
+          </Col>
+          <Section></Section>
+        </Section>
       </Container>
     </Background>
   );
