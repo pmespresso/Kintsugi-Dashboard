@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
-import graphql from "graphql";
 
-import { useExtension } from "./useExtension";
-import { useAccount } from "./useAccount";
 import fetchGraphQL from "../graphql/fetchGraphql";
 import { getVaultsByAccountId } from "../graphql/queries";
 
 export const useVaults = (account?: string) => {
   const [vaults, setVaults] = useState<any>();
-
-  console.log("useVaults() ", account);
+  const [error, setError] = useState<any>();
 
   useEffect(() => {
-    console.log("useVaults()#useEffect ", account);
     async function fetchMyVaults() {
-      const myVaults = await fetchGraphQL(getVaultsByAccountId, {
-        Account_Id: account,
-      });
+      try {
+        const myVaults = await fetchGraphQL(getVaultsByAccountId, {
+          Account_Id: account,
+        });
 
-      console.log("MY Vaults => ", myVaults);
-
-      setVaults(myVaults);
+        setVaults(myVaults.data.vaults);
+      } catch (e) {
+        setError(e);
+      }
     }
 
     if (account) {
@@ -28,5 +25,5 @@ export const useVaults = (account?: string) => {
     }
   }, [account]);
 
-  return { vaults };
+  return { vaults, error };
 };

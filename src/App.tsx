@@ -26,8 +26,9 @@ const Background = styled.div`
 
 const Title = styled.h1`
   font-family: aktiv-grotesk, sans-serif;
-  font-size: 96px;
-  font-weight: 500;
+  font-size: 76px;
+  width: 100%;
+  font-weight: 300;
 `;
 
 const TitleArea = styled.div`
@@ -59,16 +60,15 @@ function App() {
     <Background>
       <Container>
         <Section>
-          <Col>
+          <Col span={10}>
             <TitleArea>
               <Title>Use Your Bitcoin.</Title>
               <Title>Anywhere.</Title>
             </TitleArea>
           </Col>
-          <Col>
+          <Col span={2}>
             <SelectAccountDropdown />
           </Col>
-          <Section></Section>
         </Section>
       </Container>
     </Background>

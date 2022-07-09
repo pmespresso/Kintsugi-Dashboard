@@ -1,6 +1,6 @@
 
 export const getVaultsByAccountId = `
-query getVaultsByAccountId($Account_Id!: string) {
+query getVaultsByAccountId($Account_Id: String!) {
   vaults(where: {accountId_eq: $Account_Id}) {
     wrappedToken
     accountId
