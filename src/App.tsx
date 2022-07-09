@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "reactstrap";
 import styled from "styled-components";
 import SelectAccountDropdown from "./components/SelectAccountDropdown";
-import { useExtension } from "./hooks/useExtension";
-
-import logo from "./logo.svg";
+import { AppContext } from "./contexts/AppContext";
+import { useVaults } from "./hooks/useVaults";
 
 const Background = styled.div`
   background: #0f2027; /* fallback for old browsers */
@@ -50,9 +49,11 @@ const Section = styled(Row)`
 `;
 
 function App() {
-  const { allAccounts } = useExtension();
+  const { currentAccount } = useContext(AppContext);
+  console.log("App() ", currentAccount);
+  const { vaults } = useVaults(currentAccount?.address);
 
-  console.log(allAccounts);
+  console.log("vaults => ", vaults);
 
   return (
     <Background>

@@ -11,11 +11,11 @@ import {
 } from "@polkadot/extension-inject/types";
 import { useEffect, useState } from "react";
 
-declare global {
-  interface Window {
-    injectedWeb3: any;
-  }
-}
+// declare global {
+//   interface Window {
+//     injectedWeb3: any;
+//   }
+// }
 export const useExtension = () => {
   const [allInjected, setAllInjected] = useState<InjectedExtension[]>();
   const [allAccounts, setAllAccounts] = useState<InjectedAccountWithMeta[]>();
@@ -32,7 +32,7 @@ export const useExtension = () => {
     }
 
     fetchExtensionAccounts();
-  }, [window.injectedWeb3]);
+  }, []);
 
   return { allInjected, allAccounts };
 };
