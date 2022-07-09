@@ -1,10 +1,10 @@
-import React from "react";
-import { Button, Col, Container, Row } from "reactstrap";
+import React, { useContext } from "react";
+import { Col, Container, Row } from "reactstrap";
 import styled from "styled-components";
 import SelectAccountDropdown from "./components/SelectAccountDropdown";
-import { useExtension } from "./hooks/useExtension";
-
-import logo from "./logo.svg";
+import VaultsTable from "./components/VaultsTable";
+import { AppContext } from "./contexts/AppContext";
+import { useVaults } from "./hooks/useVaults";
 
 const Background = styled.div`
   background: #0f2027; /* fallback for old browsers */
@@ -27,8 +27,9 @@ const Background = styled.div`
 
 const Title = styled.h1`
   font-family: aktiv-grotesk, sans-serif;
-  font-size: 96px;
-  font-weight: 500;
+  font-size: 76px;
+  width: 100%;
+  font-weight: 300;
 `;
 
 const TitleArea = styled.div`
@@ -46,28 +47,26 @@ const Section = styled(Row)`
   justify-content: center;
   align-items: center;
 
-  padding: 10em 0 0 10em;
+  padding: 10em 0;
 `;
 
 function App() {
-  const { allAccounts } = useExtension();
+  const { currentAccount } = useContext(AppContext);
+  const { vaults } = useVaults(currentAccount?.address);
 
-  console.log(allAccounts);
+  console.log("vaults => ", vaults);
 
   return (
     <Background>
       <Container>
         <Section>
-          <Col>
+          <Col span={10}>
             <TitleArea>
               <Title>Use Your Bitcoin.</Title>
               <Title>Anywhere.</Title>
             </TitleArea>
           </Col>
-          <Col>
-            <SelectAccountDropdown />
-          </Col>
-          <Section></Section>
+          <Col span={2}>{vaults && <VaultsTable vaults={vaults} />}</Col>
         </Section>
       </Container>
     </Background>
