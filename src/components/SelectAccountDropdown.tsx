@@ -11,6 +11,9 @@ import { useExtension } from "../hooks/useExtension";
 import { toShortAddress } from "../utils/toShortAddress";
 
 const StyledDropdown = styled(Dropdown)`
+  float: right;
+  margin-bottom: 20px;
+
   > * {
     font-size: 35px;
 

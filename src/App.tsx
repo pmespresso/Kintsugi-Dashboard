@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import { Button, Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 import styled from "styled-components";
 import SelectAccountDropdown from "./components/SelectAccountDropdown";
+import VaultsTable from "./components/VaultsTable";
 import { AppContext } from "./contexts/AppContext";
 import { useVaults } from "./hooks/useVaults";
 
@@ -46,12 +47,11 @@ const Section = styled(Row)`
   justify-content: center;
   align-items: center;
 
-  padding: 10em 0 0 10em;
+  padding: 10em 0;
 `;
 
 function App() {
   const { currentAccount } = useContext(AppContext);
-  console.log("App() ", currentAccount);
   const { vaults } = useVaults(currentAccount?.address);
 
   console.log("vaults => ", vaults);
@@ -66,9 +66,7 @@ function App() {
               <Title>Anywhere.</Title>
             </TitleArea>
           </Col>
-          <Col span={2}>
-            <SelectAccountDropdown />
-          </Col>
+          <Col span={2}>{vaults && <VaultsTable vaults={vaults} />}</Col>
         </Section>
       </Container>
     </Background>
